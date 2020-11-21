@@ -4,7 +4,7 @@ The files in this repository were used to configure the network depicted below.
 ![Final Network Diagram](Images/Network-diagram.png)
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML file may be used to install only certain pieces of it, such as Filebeat.
  
-![Elk YAML file] (ansible/elk-config.yml)
+![Elk YAML file](ansible/elk-config.yml)
 
 This document contains the following details:
 - Description of the Topologu
@@ -21,7 +21,7 @@ What aspect of security do load balancers protect? What is the advantage of a ju
 
 Load balancers protect the availability of network. They also protect a network from DDOS attacks by distributing loads to the servers.
 The advantage of a jump box is that you can have secure access to manage your servers as it is an origination point to connect to the other servers in that network.
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the __logs_ and system _analysis_.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system analysis.
 What does Filebeat watch for?_
 Filebeat monitors and collects log files, and forwards them to Elasticsearch. 
 What does Metricbeat record?_
@@ -101,11 +101,12 @@ http://52.163.214.232:5601/app/kibana
 
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files etc.
-The playbook is provided below, you can use this and run: ansible-playbook filebeat-install.yml
-This can be done manually, but is easily executed through a yml file.
+The playbook is provided below, you can use this and run: ansible-playbook filebeat-install.yml while inside the ansible container of the jumpbox. Use the Filebeat-config.yml and alter the outputs to the elk IP 10.1.0.4 so that the logs are sent to the Elk server.
+This can be done manually, but is easily executed through a yml file. The steps are provided in the kibana interface http://52.163.214.232:5601/app/kibana#/home/tutorial/systemLogs
+
 This file will download filebeat, install, create a filebeat file, enable system, setup filebeat and start filebeat service, and start up on reboot. You can alter this playbook to user an image with a newer version, you will have to update the package download and the install points of the yml file.
 
-![FileBeat Playbook] [ansible/filebeat.yml]
+![FileBeat Playbook](ansible/filebeat.yml)
 
 
 download filebeat deb
