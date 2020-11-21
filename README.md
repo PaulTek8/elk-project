@@ -101,13 +101,15 @@ http://52.163.214.232:5601/app/kibana
 
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files etc.
+
 The playbook is provided below, you can use this and run: ansible-playbook filebeat-install.yml while inside the ansible container of the jumpbox. Use the Filebeat-config.yml and alter the outputs to the elk IP 10.1.0.4 so that the logs are sent to the Elk server.
-This can be done manually, but is easily executed through a yml file. The steps are provided in the kibana interface http://52.163.214.232:5601/app/kibana#/home/tutorial/systemLogs
+This can be done manually, but is easily executed through a yml file. The steps are provided in the kibana interface http://<ELKIP>:5601/app/kibana#/home/tutorial/systemLogs
 
 This file will download filebeat, install, create a filebeat file, enable system, setup filebeat and start filebeat service, and start up on reboot. You can alter this playbook to user an image with a newer version, you will have to update the package download and the install points of the yml file.
 
 ![FileBeat Playbook](ansible/filebeat.yml)
 
+Alternatively if you would like to download and install manually;
 
 download filebeat deb
 command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
