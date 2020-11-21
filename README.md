@@ -3,8 +3,9 @@
 The files in this repository were used to configure the network depicted below.
 ![Final Network Diagram](Images/Network-diagram.png)
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML file may be used to install only certain pieces of it, such as Filebeat.
-  - _TODO: Enter the playbook file._
+ 
 ![Elk YAML file] (ansible/elk-config.yml)
+
 This document contains the following details:
 - Description of the Topologu
 - Access Policies
@@ -12,16 +13,18 @@ This document contains the following details:
   - Beats in Use
   - Machines Being Monitored
 - How to Use the Ansible Build
+
 ### Description of the Topology
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+What aspect of security do load balancers protect? What is the advantage of a jump box?_
+
 Load balancers protect the availability of network. They also protect a network from DDOS attacks by distributing loads to the servers.
 The advantage of a jump box is that you can have secure access to manage your servers as it is an origination point to connect to the other servers in that network.
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the __logs_ and system _analysis_.
-- _TODO: What does Filebeat watch for?_
+What does Filebeat watch for?_
 Filebeat monitors and collects log files, and forwards them to Elasticsearch. 
-- _TODO: What does Metricbeat record?_
+What does Metricbeat record?_
 Metricbeat takes the metrics and statistics of a system and forwards it to Elasticsearch.
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
@@ -37,11 +40,11 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 ### Access Policies
 The machines on the internal network are not exposed to the public Internet. 
 Only the ELK machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+
 Home IP address
 
 Machines within the network can only be accessed by jumpbox VM.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+
 Jump Box 104.210.77.170
 
 
@@ -56,8 +59,11 @@ A summary of the access policies in place can be found in the table below.
 
 ### Elk Configuration
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+
+What is the main advantage of automating configuration with Ansible?_
+
 It allows the user to automate tasks rather than having to spend time doing them manually one at a time.
+
 The playbook implements the following tasks:
 - Install docker.io, docker and python-pip3.
 - use maximum amount of memory
@@ -99,36 +105,23 @@ The playbook is provided below, you can use this and run: ansible-playbook fileb
 This can be done manually, but is easily executed through a yml file.
 This file will download filebeat, install, create a filebeat file, enable system, setup filebeat and start filebeat service, and start up on reboot. You can alter this playbook to user an image with a newer version, you will have to update the package download and the install points of the yml file.
 
+![FileBeat Playbook] [ansible/filebeat.yml]
 
----
-- name: installing and launching filebeat
-  hosts: webservers
-  become: yes
-  tasks:
 
-  - name: download filebeat deb
-    command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+download filebeat deb
+command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
 
-  - name: install filebeat deb
-    command: dpkg -i filebeat-7.6.1-amd64.deb
+install filebeat deb
+dpkg -i filebeat-7.6.1-amd64.deb
 
-  - name: drop in filebeat.yml
-    copy:
-      src: /etc/ansible/files/filebeat-config.yml
-      dest: /etc/filebeat/filebeat.yml
+enable and configure system module
+command: filebeat modules enable system
 
-  - name: enable and configure system module
-    command: filebeat modules enable system
+setup filebeat
+command: filebeat setup
 
-  - name: setup filebeat
-    command: filebeat setup
+start filebeat service
+command: service filebeat start
 
-  - name: start filebeat service
-    command: service filebeat start
-
-  - name: enable firebeat service
-    systemd:
-      name: filebeat
-      enabled: yes
 
  
