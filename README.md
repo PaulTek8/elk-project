@@ -25,6 +25,9 @@ Filebeat monitors and collects log files, and forwards them to Elasticsearch.
 Metricbeat takes the metrics and statistics of a system and forwards it to Elasticsearch.
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
+
+
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
 | Jump Box | Gateway  | 10.0.0.4   | Linux            |
@@ -40,12 +43,17 @@ Home IP address
 Machines within the network can only be accessed by jumpbox VM.
 - _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
 Jump Box 104.210.77.170
+
+
+
 A summary of the access policies in place can be found in the table below.
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
 | Jump Box |     yes             | Home IP              |
 | web1/web2|     No              | 104.210.77.170       |
 |  elk     |     No              | 104.210.77.170       |
+
+
 ### Elk Configuration
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
 - _TODO: What is the main advantage of automating configuration with Ansible?_
@@ -57,6 +65,7 @@ The playbook implements the following tasks:
 - enable systemd service so it starts up on reboot.
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 ![ELK-container-result](Images/elk-server-container.png)
+
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
 Web 1 10.0.0.5
@@ -65,6 +74,7 @@ We have installed the following Beats on these machines:
 I installed FileBeat onto my Web 1 and Web 2 VM's
 These Beats allow us to collect the following information from each machine:
 Beats are a lightweight shippers for collecting logs or metrics. File beat specifically is installed on the Web Vm's to collect and send log files to the ELK server for analysis.
+
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 SSH into the control node and follow the steps below:
@@ -77,12 +87,19 @@ The playbook is the YAML (.yml) file and it’s to be copied into the ansible fo
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
 Update the hosts file, when running a playbook, the third line (hosts) specifies which machines you want to install the elk server or File beat etc.
 In this case after editing the hosts file to include elk, your hosts in the playbook would be elk. When installing Filebeat you would specify webservers as the hosts, the webservers are being monitors and the logs are being sent to the elk server. The elk server is specified in the filebeat configuration file which is also listed in the filebeat playbook under drop in filebeat.yml.
+
+
 - _Which URL do you navigate to in order to check that the ELK server is running?
 http://52.163.214.232:5601/app/kibana
+
+
+
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files etc.
 The playbook is provided below, you can use this and run: ansible-playbook filebeat-install.yml
 This can be done manually, but is easily executed through a yml file.
 This file will download filebeat, install, create a filebeat file, enable system, setup filebeat and start filebeat service, and start up on reboot. You can alter this playbook to user an image with a newer version, you will have to update the package download and the install points of the yml file.
+
+
 ---
 - name: installing and launching filebeat
   hosts: webservers
